@@ -1,0 +1,17 @@
+{
+  "name": "backstop-sitemap",
+  "version": "0.1.0",
+  "description": "uses backstop for regression tests but updates automatically json file based on server's sitemap",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js && backstop reference",
+    "test": "backstop test"
+  },
+  "author": "Marcelo Miranda Carneiro <mcarneiro@gmail.com>",
+  "license": "APACHEv2",
+  "dependencies": {
+    "backstopjs": "^3.0.36",
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.83.0"
+  }
+}

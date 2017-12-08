@@ -1,0 +1,8 @@
+.DS_Store
+backstop_data/bitmaps_reference
+backstop_data/bitmaps_test
+backstop_data/html_report
+backstop_data/ci_report
+cookies.json
+backstop.json
+node_modules
