@@ -51,15 +51,17 @@ const getLinks = body => {
 	const sessionCookies = jar.getCookies(config.url).map(cookie => cookie.toJSON());
 	const l = getLinks(data.body);
 
-	backstop.scenarios = l.map(elm => {
-		const label = elm.label.trim() || elm.href;
-		const override = backstop.scenarios.filter(elm => elm.label === label)[0] || {};
-		return Object.assign({}, backstop.baseScenario, {
-			label: label,
-			url: url.resolve(url.resolve(config.url, data.req.uri.pathname), elm.href)
-		}, override);
-	});
-
+	backstop.scenarios = l
+		.map(elm => {
+			const label = elm.label.trim() || elm.href;
+			const override = backstop.scenarios.filter(elm => elm.label === label)[0] || {};
+			return Object.assign({}, backstop.baseScenario, {
+				label: label,
+				url: url.resolve(url.resolve(config.url, data.req.uri.pathname), elm.href)
+			}, override);
+		})
+		.filter(elm => !config.removeList.reduce((a, b) => a || !!elm.url.match(b), false));
+		
 	console.log('\nFound links: \n ', backstop.scenarios.map(elm => elm.url).join('\n  '), '\n');
 
 	cookies = cookies.concat(sessionCookies.map(cookie => ({
